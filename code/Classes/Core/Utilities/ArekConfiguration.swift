@@ -24,11 +24,13 @@
 //
 
 import Foundation
+import UIKit
 
 public struct ArekConfiguration {
     var frequency: ArekPermissionFrequency = .OnceADay
     var presentInitialPopup: Bool = true
     var presentReEnablePopup: Bool = true
+    var getController: (() -> UIViewController?)? = nil
     
     private let week = 60.0*60.0*24.0*7.0
     private let hour = 60.0*60.0

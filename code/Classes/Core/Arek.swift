@@ -279,15 +279,23 @@ open class ArekBasePermission {
         alert.addAction(deny)
         alert.addAction(allow)
         
+        if let vc = configuration.getController?() ?? resolveViewController() {
+            DispatchQueue.main.async {
+                vc.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func resolveViewController() -> UIViewController?{
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
             }
-
-            DispatchQueue.main.async {
-                topController.present(alert, animated: true, completion: nil)
-            }
+            
+            return topController
         }
+        
+        return nil
     }
     
     private func presentReEnablePopup() {
