@@ -408,7 +408,7 @@ open class ArekBasePermission {
         case .denied:
             self.presentReEnablePopup()
             return completion(.denied)
-        case .authorized:
+        case .authorized, .limited:
             return completion(.authorized)
         case .notAvailable:
             break
