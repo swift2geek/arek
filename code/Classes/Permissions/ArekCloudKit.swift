@@ -87,7 +87,7 @@ open class ArekCloudKit: ArekBasePermission, ArekPermissionProtocol {
             case .noAccount:
                 print("[🚨 Arek 🚨] ☁️ account not configured ⛔️")
                 return completion(.denied)
-            case .couldNotDetermine:
+            case .couldNotDetermine, .temporarilyUnavailable:
                 print("[🚨 Arek 🚨] ☁️ account not determined 🤔")
                 return completion(.notDetermined)
             }
