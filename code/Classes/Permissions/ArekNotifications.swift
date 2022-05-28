@@ -50,15 +50,17 @@ open class ArekNotifications: ArekBasePermission, ArekPermissionProtocol {
     open func status(completion: @escaping ArekPermissionResponse) {
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-                switch settings.authorizationStatus {
-                case .notDetermined:
-                    return completion(.notDetermined)
-                case .denied:
-                    return completion(.denied)
-                case .authorized,
-                     .provisional,
-                     .ephemeral:
-                    return completion(.authorized)
+                DispatchQueue.main.async { 
+                    switch settings.authorizationStatus {
+                    case .notDetermined:
+                        return completion(.notDetermined)
+                    case .denied:
+                        return completion(.denied)
+                    case .authorized,
+                        .provisional,
+                        .ephemeral:
+                        return completion(.authorized)
+                    }
                 }
             }
         } else if #available(iOS 9.0, *) {
